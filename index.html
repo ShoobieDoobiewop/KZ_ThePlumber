@@ -5,7 +5,7 @@
     <title>🌿 KZ: Water Pipe Expert 🌿</title>
     <style>
         body {
-            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-family: Impact, 'Arial Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, #232526 0%, #414345 100%);
             color: #f8f8f8;
             text-align: center;
@@ -31,6 +31,12 @@
             color: #43e97b;
             text-shadow: 1px 1px 4px #000;
             min-height: 60px;
+        }
+        #money-counter {
+            font-size: 2.5em;
+            color: #43e97b;
+            margin: 20px 0;
+            text-shadow: 1px 1px 4px #000;
         }
         button {
             background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
@@ -92,11 +98,13 @@
 
     <div class="about-kz">
         <strong>Meet KZ:</strong> The legend of the pipes. Whether it's a busted water main or a "special" water pipe, KZ's got you covered. Known for his laid-back attitude and love of the herb, KZ brings a whole new meaning to "high-pressure plumbing." If you smell something skunky from the break room, don't worry—KZ is just brainstorming solutions.<br><br>
-        <em>“I don’t just fix water pipes. I vibe with them.”</em>
+        <em>"I don't just fix water pipes. I vibe with them."</em>
     </div>
 
     <div id="joke">Click the button for a KZ tip!</div>
+    <div id="money-counter">$0.00</div>
     <button onclick="showJoke()">Give me a KZ tip!</button>
+    
     <script>
         const jokes = [
             "KZ's Rule #1: If you can't find the leak, just chill and let the universe handle it.",
@@ -109,11 +117,19 @@
             "KZ: 'I bring the thunder... and sometimes, the smoke.'",
             "KZ's motto: 'Stay lifted, stay leak-free.'"
         ];
+
+        let totalMoney = 0;
+        
         function showJoke() {
             const joke = jokes[Math.floor(Math.random() * jokes.length)];
             document.getElementById('joke').textContent = joke;
+            
+            const charge = (Math.random() * 37.80 + 4.20).toFixed(2);
+            totalMoney += parseFloat(charge);
+            document.getElementById('money-counter').textContent = `$${totalMoney.toFixed(2)}`;
         }
     </script>
+
     <div class="footer">
         *Disclaimer: KZ is a fictional plumber. Please hire a real professional for actual plumbing needs.<br>
         <span style="font-size:0.9em;">© 2025 KZ's Commercial Plumbing. All rights reserved. Stay lifted.</span>
