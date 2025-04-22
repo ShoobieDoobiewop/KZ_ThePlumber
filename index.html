@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🌿 KZ: Water Pipe Expert 🌿</title>
+    <style>
+        body {
+            font-family: 'Impact', 'Arial Black', cursive, sans-serif;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            color: #f8f8f8;
+            text-align: center;
+            padding: 50px;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #000, 0 0 10px #43e97b;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #ffb300;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 4px #000;
+        }
+        #joke {
+            font-size: 2em;
+            margin: 40px 0;
+            color: #43e97b;
+            text-shadow: 1px 1px 4px #000;
+            min-height: 60px;
+        }
+        button {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #232526;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-family: inherit;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #232526 0%, #43e97b 100%);
+            transform: scale(1.07) rotate(-2deg);
+        }
+        .badge {
+            display: inline-block;
+            background: #43e97b;
+            color: #232526;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 1px 1px 6px #000;
+            letter-spacing: 1px;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #aaa;
+            font-size: 1.1em;
+            font-style: italic;
+            text-shadow: 1px 1px 2px #000;
+        }
+        .about-kz {
+            margin: 40px auto 0 auto;
+            max-width: 600px;
+            background: rgba(34, 49, 52, 0.85);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 12px #000a;
+            color: #f8f8f8;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .about-kz strong {
+            color: #43e97b;
+        }
+    </style>
+</head>
+<body>
+    <span class="badge">Water Pipe Expert • Master of Chill</span>
+    <h1>🌿 KZ's Commercial Plumbing (Sort Of) 🌿</h1>
+    <h2>We Fix Leaks, Clogs, and... Take Really Long Breaks</h2>
+
+    <div class="about-kz">
+        <strong>Meet KZ:</strong> The legend of the pipes. Whether it's a busted water main or a "special" water pipe, KZ's got you covered. Known for his laid-back attitude and love of the herb, KZ brings a whole new meaning to "high-pressure plumbing." If you smell something skunky from the break room, don't worry—KZ is just brainstorming solutions.<br><br>
+        <em>“I don’t just fix water pipes. I vibe with them.”</em>
+    </div>
+
+    <div id="joke">Click the button for a KZ tip!</div>
+    <button onclick="showJoke()">Give me a KZ tip!</button>
+    <script>
+        const jokes = [
+            "KZ's Rule #1: If you can't find the leak, just chill and let the universe handle it.",
+            "Why fix a pipe today when you can vibe and do it tomorrow?",
+            "KZ pro tip: Always carry a lighter. You never know when you'll need to... check for gas leaks.",
+            "If you see KZ on the job, he's probably meditating in the van with some herbal inspiration.",
+            "KZ says: 'I don't always fix clogs, but when I do, it's after a snack break.'",
+            "KZ once fixed a pipe with chewing gum and positive energy. It lasted 3 minutes. New record!",
+            "Our pipes are as chill as KZ's playlist (but not as leaky).",
+            "KZ: 'I bring the thunder... and sometimes, the smoke.'",
+            "KZ's motto: 'Stay lifted, stay leak-free.'"
+        ];
+        function showJoke() {
+            const joke = jokes[Math.floor(Math.random() * jokes.length)];
+            document.getElementById('joke').textContent = joke;
+        }
+    </script>
+    <div class="footer">
+        *Disclaimer: KZ is a fictional plumber. Please hire a real professional for actual plumbing needs.<br>
+        <span style="font-size:0.9em;">© 2025 KZ's Commercial Plumbing. All rights reserved. Stay lifted.</span>
+    </div>
+</body>
+</html>
