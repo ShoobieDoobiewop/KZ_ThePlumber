@@ -423,7 +423,7 @@
         <div class="about-kz" id="about">
             <div class="portrait-container animate__animated animate__fadeIn">
                 <div class="portrait-glow"></div>
-                <img src="images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">
+                <img src="../../../FunnyWebsite/images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">
             </div>
             <div class="about-content">
                 <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
@@ -600,6 +600,14 @@
             document.querySelectorAll('.testimonial-card, .price-card, .faq-item').forEach((el) => {
                 observer.observe(el);
             });
+
+            const portraitImg = document.querySelector('.portrait-img');
+            if (portraitImg) {
+                portraitImg.onerror = function() {
+                    console.error('Image failed to load:', this.src);
+                    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="100%" height="100%" fill="%23141E30"/%3E%3Ctext x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="16" fill="%23f8f8f8"%3EImage Loading Error%3C/text%3E%3C/svg%3E';
+                };
+            }
         });
     </script>
 </body>
