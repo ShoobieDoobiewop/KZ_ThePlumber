@@ -221,15 +221,157 @@
         .highlight {
             animation: highlight 0.5s ease-in-out;
         }
+
+        .nav-bar {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--glass);
+            color: var(--primary);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem auto;
+        }
+
+        .testimonial-card {
+            background: var(--glass);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .customer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem auto;
+        }
+
+        .price-card {
+            background: var(--glass);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .features-list {
+            text-align: left;
+            margin: 1.5rem 0;
+            list-style: none;
+        }
+
+        .features-list li {
+            margin: 0.5rem 0;
+        }
+
+        .features-list li::before {
+            content: "🌿";
+            margin-right: 0.5rem;
+        }
+
+        .faq-section {
+            margin: 3rem auto;
+            max-width: 800px;
+        }
+
+        .faq-item {
+            background: var(--glass);
+            border-radius: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About KZ</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+        </nav>
         <span class="badge">Professional Water Pipe Specialist</span>
         <h1>🌿 KZ's Premium Plumbing Solutions 🌿</h1>
         <h2>Excellence in Pipe Management & Extended Break Technology</h2>
 
-        <div class="about-kz">
+        <div class="about-kz" id="about">
             <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
             <em>"Every pipe has a story. I'm just here to listen... and occasionally fix them."</em>
         </div>
@@ -238,7 +380,7 @@
         <div id="money-counter">$0.00</div>
         <button class="btn" onclick="showJoke()">Request Professional Advice</button>
 
-        <div class="service-features animate__animated animate__fadeIn">
+        <div class="service-features animate__animated animate__fadeIn" id="services">
             <div class="feature-card">
                 <i class="ri-time-line feature-icon"></i>
                 <h3>Flexible Hours</h3>
@@ -255,6 +397,70 @@
                 <p>Why rush? Let's meditate on that leak for a while.</p>
             </div>
         </div>
+
+        <section id="testimonials" class="testimonials">
+            <div class="testimonial-card animate__animated animate__fadeIn">
+                <p>"After KZ's meditation session with my pipes, the weird noises stopped. Though now my faucet only works when Mercury isn't in retrograde."</p>
+                <div class="customer-info">
+                    <div class="customer-avatar">🌙</div>
+                    <div>
+                        <strong>Luna Dreamweaver</strong>
+                        <div>Spiritual Homeowner</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate__animated animate__fadeIn">
+                <p>"KZ spent 4 hours explaining the chakras of my plumbing system. Haven't had a clog since, though my water bill now includes crystals."</p>
+                <div class="customer-info">
+                    <div class="customer-avatar">🔮</div>
+                    <div>
+                        <strong>Crystal Thompson</strong>
+                        <div>Enlightened Client</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing-cards">
+            <div class="price-card animate__animated animate__fadeIn">
+                <h3>Basic Vibes</h3>
+                <div class="price">$420/visit</div>
+                <ul class="features-list">
+                    <li>Basic pipe meditation</li>
+                    <li>Aura cleansing of faucets</li>
+                    <li>Organic pipe solutions</li>
+                    <li>1 free emergency break</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+            <div class="price-card animate__animated animate__fadeIn">
+                <h3>Premium Enlightenment</h3>
+                <div class="price">$840/visit</div>
+                <ul class="features-list">
+                    <li>Advanced pipe chakra alignment</li>
+                    <li>Crystal-infused water treatment</li>
+                    <li>Unlimited emergency breaks</li>
+                    <li>Free sage burning ceremony</li>
+                </ul>
+                <button class="btn">Choose Plan</button>
+            </div>
+        </section>
+
+        <section id="faq" class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>What are your actual working hours?</h3>
+                <div class="faq-answer">Time is a construct, but we typically appear between 4:20 and whenever the vibes feel right. Emergency services available during full moons.</div>
+            </div>
+            <div class="faq-item">
+                <h3>Do you accept regular payment methods?</h3>
+                <div class="faq-answer">We accept cash, credit cards, and good karma. Crystal trades considered on a case-by-case basis.</div>
+            </div>
+            <div class="faq-item">
+                <h3>How long does a typical service take?</h3>
+                <div class="faq-answer">Depends on the spiritual alignment of your pipes. Could be 30 minutes, could be 3 days. Time is relative when you're in the zone.</div>
+            </div>
+        </section>
     </div>
 
     <footer class="footer">
@@ -308,6 +514,36 @@
                 setTimeout(() => {
                     card.classList.add('animate__animated', 'animate__fadeInUp');
                 }, index * 200);
+            });
+
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Initialize animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.testimonial-card, .price-card, .faq-item').forEach((el) => {
+                observer.observe(el);
             });
         });
     </script>
