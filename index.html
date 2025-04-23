@@ -154,14 +154,63 @@
         }
 
         .about-kz {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
             margin: 2.5rem auto;
-            max-width: 800px;
+            max-width: 1000px;
             background: rgba(34, 49, 52, 0.95);
             border-radius: 1rem;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .portrait-container {
+            flex: 0 0 300px;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .portrait-img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            filter: contrast(1.1) brightness(1.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portrait-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle at center, 
+                rgba(0, 242, 96, 0.2) 0%, 
+                transparent 70%);
+            filter: blur(15px);
+            z-index: 0;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .about-kz {
+                text-align: center;
+            }
+            .about-content {
+                text-align: center;
+            }
+            .portrait-container {
+                margin: 0 auto;
+            }
         }
 
         .badge {
@@ -372,8 +421,14 @@
         <h2>Excellence in Pipe Management & Extended Break Technology</h2>
 
         <div class="about-kz" id="about">
-            <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
-            <em>"Every pipe has a story. I'm just here to listen... and occasionally fix them."</em>
+            <div class="portrait-container animate__animated animate__fadeIn">
+                <div class="portrait-glow"></div>
+                <img src="images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">
+            </div>
+            <div class="about-content">
+                <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
+                <em>"Every pipe has a story. I'm just here to listen... and occasionally fix them."</em>
+            </div>
         </div>
 
         <div id="joke">Click for Professional KZ Wisdom</div>
