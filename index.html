@@ -423,7 +423,7 @@
         <div class="about-kz" id="about">
             <div class="portrait-container animate__animated animate__fadeIn">
                 <div class="portrait-glow"></div>
-                <img src="../../../FunnyWebsite/images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">
+                <img src="C:/FunnyWebsite/images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">="KZ - Water Pipe Expert" class="portrait-img">
             </div>
             <div class="about-content">
                 <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
@@ -541,6 +541,10 @@
         function showJoke() {
             const jokeElement = document.getElementById('joke');
             const moneyElement = document.getElementById('money-counter');
+            const charge = (Math.random() * 420.00 + 42.0).toFixed(2);
+            
+            totalMoney += parseFloat(charge);
+            moneyElement.textContent = `$${totalMoney.toFixed(2)}`;
             
             jokeElement.classList.add('animate__animated', 'animate__fadeOut');
             
@@ -548,12 +552,8 @@
                 const joke = jokes[Math.floor(Math.random() * jokes.length)];
                 jokeElement.textContent = joke;
                 
-                const charge = (Math.random() * 420.00 + 42.0).toFixed(2);
-                totalMoney += parseFloat(charge);
-                
                 jokeElement.classList.remove('animate__fadeOut');
                 jokeElement.classList.add('animate__fadeIn');
-                moneyElement.textContent = `$${totalMoney.toFixed(2)}`;
                 
                 moneyElement.classList.add('animate__animated', 'animate__pulse');
                 setTimeout(() => {
