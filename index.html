@@ -2,160 +2,195 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌿 KZ: Water Pipe Expert 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Modern CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #43e97b;
+            --secondary: #38f9d7;
+            --dark: #232526;
+            --text: #f8f8f8;
+            --gradient: linear-gradient(135deg, var(--dark) 0%, #414345 100%);
+        }
+
         body {
-            font-family: Impact, 'Arial Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #232526 0%, #414345 100%);
-            color: #f8f8f8;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gradient);
+            color: var(--text);
             text-align: center;
-            padding: 50px;
+            padding: 2rem;
             min-height: 100vh;
-        }
-        h1 {
-            font-size: 3em;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px #000, 0 0 10px #43e97b;
-            margin-bottom: 10px;
-        }
-        h2 {
-            font-size: 1.5em;
-            font-style: italic;
-            color: #ffb300;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 4px #000;
-        }
-        #joke {
-            font-size: 2em;
-            margin: 40px 0;
-            color: #43e97b;
-            text-shadow: 1px 1px 4px #000;
-            min-height: 60px;
-        }
-        #money-counter {
-            font-size: 2.5em;
-            color: #43e97b;
-            margin: 20px 0;
-            text-shadow: 1px 1px 4px #000;
-        }
-        button {
-            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
-            color: #232526;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.5em;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            font-family: inherit;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #232526 0%, #43e97b 100%);
-            transform: scale(1.07) rotate(-2deg);
-        }
-        .badge {
-            display: inline-block;
-            background: #43e97b;
-            color: #232526;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 1em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 1px 1px 6px #000;
-            letter-spacing: 1px;
-        }
-        .footer {
-            margin-top: 50px;
-            color: #aaa;
-            font-size: 1.1em;
-            font-style: italic;
-            text-shadow: 1px 1px 2px #000;
-        }
-        .about-kz {
-            margin: 40px auto 0 auto;
-            max-width: 600px;
-            background: rgba(34, 49, 52, 0.85);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 2px 12px #000a;
-            color: #f8f8f8;
-            font-size: 1.2em;
             line-height: 1.6;
         }
-        .about-kz strong {
-            color: #43e97b;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
-        .nav-button {
-            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
-            color: #232526;
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3), 0 0 10px var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #ffb300;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        #joke {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 2.5rem 0;
+            color: var(--primary);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            min-height: 60px;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            transition: opacity 0.3s ease;
+        }
+
+        #money-counter {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            color: var(--primary);
+            margin: 1.5rem 0;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--dark);
             border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 10px;
+            padding: 1rem 2.5rem;
+            font-size: 1.25rem;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            font-family: inherit;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: 600;
+            letter-spacing: 1px;
         }
-        .nav-button:hover {
-            background: linear-gradient(90deg, #232526 0%, #43e97b 100%);
-            color: #f8f8f8;
-            transform: scale(1.07) rotate(-2deg);
+
+        .btn:hover {
+            background: linear-gradient(90deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--text);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67,233,123,0.4);
+        }
+
+        .about-kz {
+            margin: 2.5rem auto;
+            max-width: 800px;
+            background: rgba(34, 49, 52, 0.95);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(67,233,123,0.3);
+            letter-spacing: 1px;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            color: #aaa;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @keyframes highlight {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .highlight {
+            animation: highlight 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
-    <span class="badge">Water Pipe Expert • Master of Chill</span>
-    <h1>🌿 KZ's Commercial Plumbing (Sort Of) 🌿</h1>
-    <h2>We Fix Leaks, Clogs, and... Take Really Long Breaks</h2>
+    <div class="container">
+        <span class="badge">Professional Water Pipe Specialist</span>
+        <h1>🌿 KZ's Premium Plumbing Solutions 🌿</h1>
+        <h2>Excellence in Pipe Management & Extended Break Technology</h2>
 
-    <div class="about-kz">
-        <strong>Meet KZ:</strong> The legend of the pipes. Whether it's a busted water main or a "special" water pipe, KZ's got you covered. Known for his laid-back attitude and love of the herb, KZ brings a whole new meaning to "high-pressure plumbing." If you smell something skunky from the break room, don't worry—KZ is just brainstorming solutions.<br><br>
-        <em>"I don't just fix water pipes. I vibe with them."</em>
+        <div class="about-kz">
+            <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
+            <em>"Every pipe has a story. I'm just here to listen... and occasionally fix them."</em>
+        </div>
+
+        <div id="joke">Click for Professional KZ Wisdom</div>
+        <div id="money-counter">$0.00</div>
+        <button class="btn" onclick="showJoke()">Request Professional Advice</button>
     </div>
 
-    <div id="joke">Click the button for a KZ tip!</div>
-    <div id="money-counter">$0.00</div>
-    <button onclick="showJoke()">Give me a KZ tip!</button>
-    <br><br>
-    <a href="about.html" class="nav-button">Learn More About KZ</a>
+    <footer class="footer">
+        <p>*Disclaimer: KZ is a parody character. For actual plumbing emergencies, please contact a licensed professional.</p>
+        <p>© 2025 KZ's Premium Plumbing Solutions. All rights reserved. Elevating consciousness, one pipe at a time.</p>
+    </footer>
 
     <script>
         const jokes = [
-            "KZ's Rule #1: If you can't find the leak, just chill and let the universe handle it.",
-            "Why fix a pipe today when you can vibe and do it tomorrow?",
-            "KZ pro tip: Always carry a lighter. You never know when you'll need to... check for gas leaks.",
-            "If you see KZ on the job, he's probably meditating in the van with some herbal inspiration.",
-            "KZ says: 'I don't always fix clogs, but when I do, it's after a snack break.'",
-            "KZ once fixed a pipe with chewing gum and positive energy. It lasted 3 minutes. New record!",
-            "Our pipes are as chill as KZ's playlist (but not as leaky).",
-            "KZ: 'I bring the thunder... and sometimes, the smoke.'",
-            "KZ's motto: 'Stay lifted, stay leak-free.'"
+            "KZ's Professional Rule #1: Pipe meditation leads to pipe revelation.",
+            "Advanced KZ Methodology: Time is relative, especially during break hours.",
+            "KZ's Expert Insight: Every leak is an opportunity for spiritual growth.",
+            "Premium KZ Service: Our response time is measured in vibes, not minutes.",
+            "KZ's Technical Analysis: If the pipe isn't fixed, it's because Mercury is in retrograde.",
+            "KZ's Engineering Principle: The best solutions come after extensive 'research' sessions.",
+            "Professional KZ Wisdom: Sometimes the real treasure is the breaks we took along the way.",
+            "KZ's Corporate Policy: We don't chase deadlines, we transcend them.",
+            "KZ's Quality Guarantee: Our work is as smooth as our operation hours."
         ];
 
         let totalMoney = 0;
-
+        
         function showJoke() {
-            const joke = jokes[Math.floor(Math.random() * jokes.length)];
-            document.getElementById('joke').textContent = joke;
-
-            const charge = (Math.random() * 37.80 + 4.20).toFixed(2);
-            totalMoney += parseFloat(charge);
-            document.getElementById('money-counter').textContent = `$${totalMoney.toFixed(2)}`;
+            const jokeElement = document.getElementById('joke');
+            const moneyElement = document.getElementById('money-counter');
+            
+            jokeElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                const joke = jokes[Math.floor(Math.random() * jokes.length)];
+                jokeElement.textContent = joke;
+                
+                const charge = (Math.random() * 420.00 + 42.0).toFixed(2);
+                totalMoney += parseFloat(charge);
+                
+                jokeElement.style.opacity = 1;
+                moneyElement.textContent = `$${totalMoney.toFixed(2)}`;
+                
+                moneyElement.classList.add('highlight');
+                setTimeout(() => moneyElement.classList.remove('highlight'), 1000);
+            }, 200);
         }
     </script>
-
-    <div class="footer">
-        *Disclaimer: KZ is a shitty plumber. Please hire a real professional for actual plumbing needs.<br>
-        <span style="font-size:0.9em;">© 2025 KZ's Commercial Plumbing. All rights belong to Cohen. Stay lifted.</span>
-    </div>
 </body>
 </html>
