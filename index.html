@@ -89,6 +89,27 @@
         .about-kz strong {
             color: #43e97b;
         }
+        .nav-button {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            color: #232526;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-family: inherit;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px;
+        }
+        .nav-button:hover {
+            background: linear-gradient(90deg, #232526 0%, #43e97b 100%);
+            color: #f8f8f8;
+            transform: scale(1.07) rotate(-2deg);
+        }
     </style>
 </head>
 <body>
@@ -104,7 +125,9 @@
     <div id="joke">Click the button for a KZ tip!</div>
     <div id="money-counter">$0.00</div>
     <button onclick="showJoke()">Give me a KZ tip!</button>
-    
+    <br><br>
+    <a href="about.html" class="nav-button">Learn More About KZ</a>
+
     <script>
         const jokes = [
             "KZ's Rule #1: If you can't find the leak, just chill and let the universe handle it.",
@@ -119,11 +142,11 @@
         ];
 
         let totalMoney = 0;
-        
+
         function showJoke() {
             const joke = jokes[Math.floor(Math.random() * jokes.length)];
             document.getElementById('joke').textContent = joke;
-            
+
             const charge = (Math.random() * 37.80 + 4.20).toFixed(2);
             totalMoney += parseFloat(charge);
             document.getElementById('money-counter').textContent = `$${totalMoney.toFixed(2)}`;
