@@ -155,7 +155,7 @@
 
         .about-kz {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 3rem;
             flex-wrap: wrap;
             justify-content: center;
@@ -172,28 +172,66 @@
         .portrait-container {
             flex: 0 0 300px;
             max-width: 300px;
+            aspect-ratio: 1 / 1;
             position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: var(--dark);
+            transform: translateZ(0);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
         .portrait-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
-            height: 300px; /* Fixed height */
-            object-fit: cover; /* Maintains aspect ratio */
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
             border-radius: 1rem;
-            filter: contrast(1.1) brightness(1.05);
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 1;
+            filter: contrast(1.1) brightness(1.05) saturate(1.1);
+            transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+            image-rendering: -webkit-optimize-contrast;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -webkit-transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .portrait-glow {
             position: absolute;
             inset: -20px;
-            background: radial-gradient(circle at center, 
-                rgba(0, 242, 96, 0.2) 0%, 
-                transparent 70%);
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 242, 96, 0.2) 0%,
+                rgba(0, 242, 96, 0.1) 35%,
+                transparent 70%
+            );
             filter: blur(15px);
             z-index: 0;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .portrait-container:hover .portrait-img {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .portrait-container:hover .portrait-glow {
+            opacity: 1;
+        }
+
+        .portrait-container.loading {
+            background: linear-gradient(90deg, var(--dark) 0%, var(--light) 100%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
 
         .about-content {
@@ -210,6 +248,8 @@
                 text-align: center;
             }
             .portrait-container {
+                width: 100%;
+                max-width: 280px;
                 margin: 0 auto;
             }
         }
@@ -424,7 +464,13 @@
         <div class="about-kz" id="about">
             <div class="portrait-container animate__animated animate__fadeIn">
                 <div class="portrait-glow"></div>
-                <img src="../../../FunnyWebsite/images/KZ_Site_Image.png" alt="KZ - Water Pipe Expert" class="portrait-img">
+                <img 
+                    src="../../../FunnyWebsite/images/KZ_Site_Image.png"
+                    alt="KZ - Water Pipe Expert"
+                    class="portrait-img"
+                    loading="lazy"
+                    decoding="async"
+                >
             </div>
             <div class="about-content">
                 <strong>Meet KZ:</strong> The innovator in alternative plumbing solutions. Combining traditional techniques with a unique approach to relaxation, KZ has revolutionized the industry's perspective on pipe maintenance. Our methodology includes extensive "meditation sessions" and herb-inspired problem-solving techniques.<br><br>
@@ -602,19 +648,29 @@
                 observer.observe(el);
             });
 
+            const portraitContainer = document.querySelector('.portrait-container');
             const portraitImg = document.querySelector('.portrait-img');
-            if (portraitImg) {
-                portraitImg.onerror = function() {
-                    console.error('Image failed to load:', this.src);
-                    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="100%" height="100%" fill="%23141E30"/%3E%3Ctext x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="16" fill="%23f8f8f8"%3EImage Loading Error%3C/text%3E%3C/svg%3E';
-                };
 
+            if (portraitImg && portraitContainer) {
+                // Add loading state
+                portraitContainer.classList.add('loading');
+
+                // Image loading optimization
+                portraitImg.loading = 'lazy';
+                portraitImg.decoding = 'async';
+
+                // Handle successful load
                 portraitImg.addEventListener('load', function() {
                     console.log('Image loaded successfully');
                     console.log('Natural size:', this.naturalWidth, 'x', this.naturalHeight);
+                    portraitContainer.classList.remove('loading');
                 });
+
+                // Handle load error
                 portraitImg.addEventListener('error', function() {
                     console.error('Image failed to load:', this.src);
+                    portraitContainer.classList.remove('loading');
+                    this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"%3E%3Crect width="100%" height="100%" fill="%23141E30"/%3E%3Ctext x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="16" fill="%23f8f8f8"%3EImage Loading Error%3C/text%3E%3C/svg%3E';
                 });
             }
         });
