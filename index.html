@@ -434,6 +434,36 @@
         .faq-item.active .faq-answer {
             display: block;
         }
+
+        .float {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .smoke {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            opacity: 0;
+            filter: blur(8px);
+            z-index: 1000;
+        }
+
+        .dizzy {
+            animation: dizzy 2s linear infinite;
+        }
+
+        @keyframes dizzy {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -653,6 +683,92 @@
             document.querySelectorAll('.testimonial-card, .price-card, .faq-item').forEach((el) => {
                 observer.observe(el);
             });
+        });
+
+        // Make KZ float when clicked
+        document.querySelector('.portrait-placeholder').addEventListener('click', function() {
+            this.classList.add('dizzy');
+            setTimeout(() => this.classList.remove('dizzy'), 2000);
+        });
+
+        // Create smoke effects when hovering over certain elements
+        function createSmoke(e) {
+            const smoke = document.createElement('div');
+            smoke.className = 'smoke';
+            smoke.style.background = 'radial-gradient(circle, rgba(169,169,169,0.8) 0%, rgba(169,169,169,0) 70%)';
+            smoke.style.left = `${e.clientX - 25}px`;
+            smoke.style.top = `${e.clientY - 25}px`;
+            document.body.appendChild(smoke);
+
+            let opacity = 0.8;
+            let size = 50;
+            let upwardMovement = 0;
+
+            const animateSmoke = () => {
+                opacity -= 0.01;
+                size += 1;
+                upwardMovement += 1;
+                
+                smoke.style.opacity = opacity;
+                smoke.style.width = `${size}px`;
+                smoke.style.height = `${size}px`;
+                smoke.style.transform = `translateY(-${upwardMovement}px)`;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animateSmoke);
+                } else {
+                    smoke.remove();
+                }
+            };
+
+            requestAnimationFrame(animateSmoke);
+        }
+
+        // Add smoke effect to relevant elements
+        ['#joke', '.feature-card', '.price-card'].forEach(selector => {
+            document.querySelectorAll(selector).forEach(element => {
+                element.addEventListener('mousemove', createSmoke);
+            });
+        });
+
+        // Make elements wobbly on scroll
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.feature-card, .price-card, .testimonial-card');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const wobble = Math.sin(Date.now() / 1000) * 5;
+                    element.style.transform = `rotate(${wobble}deg)`;
+                }
+            });
+        });
+
+        // Random nap time
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (Math.random() < 0.2) { // 20% chance
+                    e.preventDefault();
+                    this.textContent = "ZZzzz...";
+                    this.classList.add('float');
+                    setTimeout(() => {
+                        this.textContent = this.originalText || "Choose Plan";
+                        this.classList.remove('float');
+                    }, 3000);
+                }
+            });
+        });
+
+        // Time warp effect
+        let isWarping = false;
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '4' && e.altKey && !isWarping) {
+                isWarping = true;
+                document.body.style.animation = 'dizzy 1s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                    isWarping = false;
+                }, 4200); // ;)
+            }
         });
     </script>
 </body>
