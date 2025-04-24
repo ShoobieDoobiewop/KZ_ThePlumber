@@ -464,6 +464,47 @@
             50% { transform: rotate(180deg) scale(1.2); }
             100% { transform: rotate(360deg) scale(1); }
         }
+
+        /* Floating clouds that stay in view */
+        .floating-cloud {
+            position: fixed;
+            width: 100px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            filter: blur(8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Corner decorations */
+        .corner-leaf {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(0, 242, 96, 0.3));
+            pointer-events: none;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        /* Mobile-specific animations */
+        @media (max-width: 768px) {
+            .floating-cloud {
+                width: 60px;
+                height: 40px;
+            }
+            
+            .corner-leaf {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -695,33 +736,24 @@
         function createSmoke(e) {
             const smoke = document.createElement('div');
             smoke.className = 'smoke';
+            
+            // Handle both mouse and touch events
+            const x = e.clientX || e.pageX;
+            const y = e.clientY || e.pageY;
+            
             smoke.style.background = 'radial-gradient(circle, rgba(169,169,169,0.8) 0%, rgba(169,169,169,0) 70%)';
-            smoke.style.left = `${e.clientX - 25}px`;
-            smoke.style.top = `${e.clientY - 25}px`;
+            smoke.style.left = `${x - 25}px`;
+            smoke.style.top = `${y - 25}px`;
             document.body.appendChild(smoke);
 
-            let opacity = 0.8;
-            let size = 50;
-            let upwardMovement = 0;
+            // Use CSS transforms for better performance
+            smoke.style.transition = 'all 2s ease-out';
+            requestAnimationFrame(() => {
+                smoke.style.transform = `translate(0, -100px) scale(2)`;
+                smoke.style.opacity = '0';
+            });
 
-            const animateSmoke = () => {
-                opacity -= 0.01;
-                size += 1;
-                upwardMovement += 1;
-                
-                smoke.style.opacity = opacity;
-                smoke.style.width = `${size}px`;
-                smoke.style.height = `${size}px`;
-                smoke.style.transform = `translateY(-${upwardMovement}px)`;
-
-                if (opacity > 0) {
-                    requestAnimationFrame(animateSmoke);
-                } else {
-                    smoke.remove();
-                }
-            };
-
-            requestAnimationFrame(animateSmoke);
+            return smoke;
         }
 
         // Add smoke effect to relevant elements
@@ -770,6 +802,71 @@
                 }, 4200); // ;)
             }
         });
+
+        // Create anchored decorative elements
+        function createAnchoredDecorations() {
+            // Create corner leaves
+            const corners = [
+                { top: '10px', left: '10px', rotation: '0deg' },
+                { top: '10px', right: '10px', rotation: '90deg' },
+                { bottom: '10px', left: '10px', rotation: '-90deg' },
+                { bottom: '10px', right: '10px', rotation: '180deg' }
+            ];
+
+            corners.forEach(pos => {
+                const leaf = document.createElement('div');
+                leaf.className = 'corner-leaf';
+                leaf.textContent = '🌿';
+                Object.assign(leaf.style, pos);
+                document.body.appendChild(leaf);
+            });
+
+            // Create floating clouds
+            const cloudPositions = [
+                { left: '10%', top: '20%' },
+                { right: '10%', top: '40%' },
+                { left: '15%', bottom: '30%' },
+                { right: '15%', bottom: '20%' }
+            ];
+
+            cloudPositions.forEach(pos => {
+                const cloud = document.createElement('div');
+                cloud.className = 'floating-cloud';
+                Object.assign(cloud.style, pos);
+                
+                // Add subtle animation
+                cloud.style.animation = `float ${5 + Math.random() * 5}s ease-in-out infinite`;
+                document.body.appendChild(cloud);
+            });
+        }
+
+        // Initialize anchored decorations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            createAnchoredDecorations();
+            
+            // Optimize mobile performance
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        // Update only visible elements
+                        const viewHeight = window.innerHeight;
+                        document.querySelectorAll('.floating-cloud').forEach(cloud => {
+                            const rect = cloud.getBoundingClientRect();
+                            cloud.style.opacity = rect.top < viewHeight && rect.bottom > 0 ? '1' : '0';
+                        });
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        });
+
+        // Add touch interactions for mobile
+        document.addEventListener('touchstart', e => {
+            const smoke = createSmoke(e.touches[0]);
+            setTimeout(() => smoke.remove(), 2000);
+        }, { passive: true });
     </script>
 </body>
 </html>
